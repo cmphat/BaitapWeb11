@@ -1,0 +1,42 @@
+# EXAM PROJECT AUDIT
+
+## PROJECT STATUS
+- Java: 26.0.2.1 (Oracle JDK 26, `maven.compiler.release` = 26)
+- Maven: Apache Maven 3.9.11 (`E:\Web\Tool\apache-maven-3.9.11-bin\apache-maven-3.9.11`)
+- Packaging: war (Artifact: `Exercise`, `Exercise.war`)
+- Server: Apache Tomcat 10.1.44 (`E:\Web\Tool\apache-tomcat-10.1.44`)
+- Port: 8080 (HTTP default), 8443 (HTTPS)
+- Context path: `/Exercise`
+- Database: Microsoft SQL Server 2022 (Host: `localhost:1433`, Service: `MSSQLSERVER` Running)
+- Database name: `ExerciseWeb` (Credentials: `sa` / `1504`)
+- JDBC/JPA: 
+  - JDBC Driver: `com.microsoft.sqlserver:mssql-jdbc:12.8.1.jre11`
+  - JPA / ORM: Hibernate Core `6.6.1.Final` (Jakarta Persistence 3.0)
+  - Connection Helper: `vn.iotstar.connection.DBConnection` (Pure JDBC)
+  - JPA Helper: `vn.iotstar.config.JpaConfig` (EntityManagerFactory `jpa-hibernate-sqlserver`)
+- Servlet: Jakarta Servlet API 6.0.0 (`jakarta.servlet:jakarta.servlet-api:6.0.0`, scope: provided)
+- JSP/JSTL: 
+  - JSP API: Jakarta Servlet JSP API 3.1.1 (`jakarta.servlet.jsp:jakarta.servlet.jsp-api:3.1.1`, scope: provided)
+  - JSTL API: `jakarta.servlet.jsp.jstl:jakarta.servlet.jsp.jstl-api:3.0.0`
+  - JSTL Impl: `org.glassfish.web:jakarta.servlet.jsp.jstl:3.0.1`
+- Bootstrap: Bootstrap 5.3.3 + Bootstrap Icons 1.11.3 (Loaded via CDN in decorator)
+- SiteMesh: SiteMesh 3.3.0-RC1 (`org.sitemesh:sitemesh:3.3.0-RC1`), filter configured in `web.xml`, mapping in `WEB-INF/sitemesh3.xml`, main decorator at `WEB-INF/decorators/main.jsp`
+- Build status: PASS (`mvn package` builds `Exercise.war` cleanly with 0 errors)
+- Run status: PASS (Tomcat 10.1.44 verified, SQL Server 2022 running, database `ExerciseWeb` tables present)
+- Main risks:
+  - Java 26 preview features / compiler release flags if running on older JDK (must keep `--release 26` or match runtime JDK).
+  - Port 8080 conflict if another background process holds 8080.
+  - SQL Server connection password mismatch if running on a machine where sa password is not `1504`.
+  - SiteMesh decorator wrapping pages unexpectedly if exclusions are not configured in `sitemesh3.xml`.
+- Reusable modules:
+  - `JpaConfig.java` & `DBConnection.java`: Ready-to-use persistence and JDBC connection providers.
+  - Category JPA CRUD & Product CRUD: Complete reference implementation of 3-tier architecture (Controller -> Service -> DAO -> JPA/DB).
+  - `sitemesh3.xml` & `WEB-INF/decorators/main.jsp`: Responsive navigation and Bootstrap styling layout.
+  - `LoginServlet.java`, `User.java`, `UserDaoImpl.java`: Authentication and session management reference.
+- Broken modules:
+  - None. All modules compile without errors.
+- Missing exam-ready components:
+  - Standardized lightweight `Sample` CRUD template for rapid search-and-replace during 180-minute exam.
+  - Exam SQL scripts (`database/exam_template.sql`, `database/reset_exam_data.sql`).
+  - Standardized query snippets (JDBC, JPA, SQL, Session, Quick Prompts, Troubleshooting).
+  - `PROJECT_CONTEXT.md`, `EXAM_PROMPT.md`, `EXAM_CHECKLIST.md`.
