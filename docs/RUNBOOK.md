@@ -3,7 +3,7 @@
 Tài liệu hướng dẫn vận hành, build, chạy và kiểm tra môi trường cho bài thi Java Web.
 
 **THƯ MỤC DỰ ÁN CHÍNH (REAL PROJECT PATH):**
-`E:\Web\New folder\BaitapWeb\HomeWorkWeb_Chau_Minh_Phat`
+`E:\Web\New folder\BaitapWeb\ProjectWeb_ChauMinhPhat_24110294`
 
 ---
 
@@ -28,7 +28,7 @@ mvn -version
 ## 3. BUILD & PACKAGE (CHẠY TẠI THƯ MỤC Ổ E)
 ```powershell
 # Chuyển vào thư mục dự án trên ổ E nếu cần
-cd "E:\Web\New folder\BaitapWeb\HomeWorkWeb_Chau_Minh_Phat"
+cd "E:\Web\New folder\BaitapWeb\ProjectWeb_ChauMinhPhat_24110294"
 
 # Clean project
 mvn clean
@@ -39,7 +39,7 @@ mvn compile
 # Build WAR package
 mvn clean package -DskipTests
 ```
-*Output file:* `E:\Web\New folder\BaitapWeb\HomeWorkWeb_Chau_Minh_Phat\target\Exercise.war`
+*Output file:* `E:\Web\New folder\BaitapWeb\ProjectWeb_ChauMinhPhat_24110294\target\Exercise.war`
 
 ---
 
@@ -51,7 +51,7 @@ mvn clean package -DskipTests
 
 ### Deploy WAR vào Tomcat:
 ```powershell
-Copy-Item "E:\Web\New folder\BaitapWeb\HomeWorkWeb_Chau_Minh_Phat\target\Exercise.war" -Destination "E:\Web\Tool\apache-tomcat-10.1.44\webapps\Exercise.war" -Force
+Copy-Item "E:\Web\New folder\BaitapWeb\ProjectWeb_ChauMinhPhat_24110294\target\Exercise.war" -Destination "E:\Web\Tool\apache-tomcat-10.1.44\webapps\Exercise.war" -Force
 ```
 
 ### Khởi động Tomcat độc lập:
@@ -105,10 +105,10 @@ sqlcmd -S localhost -U sa -P 1504 -d ExerciseWeb -Q "SELECT @@VERSION;"
 
 ### Chạy script tạo dữ liệu mẫu thi:
 ```powershell
-sqlcmd -S localhost -U sa -P 1504 -d ExerciseWeb -i "E:\Web\New folder\BaitapWeb\HomeWorkWeb_Chau_Minh_Phat\database\exam_template.sql"
+sqlcmd -S localhost -U sa -P 1504 -d ExerciseWeb -i "E:\Web\New folder\BaitapWeb\ProjectWeb_ChauMinhPhat_24110294\database\exam_template.sql"
 ```
 
 ### Reset dữ liệu thi về ban đầu:
 ```powershell
-sqlcmd -S localhost -U sa -P 1504 -d ExerciseWeb -i "E:\Web\New folder\BaitapWeb\HomeWorkWeb_Chau_Minh_Phat\database\reset_exam_data.sql"
+sqlcmd -S localhost -U sa -P 1504 -d ExerciseWeb -i "E:\Web\New folder\BaitapWeb\ProjectWeb_ChauMinhPhat_24110294\database\reset_exam_data.sql"
 ```

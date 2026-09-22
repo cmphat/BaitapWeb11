@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
 <html lang="vi">
@@ -122,7 +122,7 @@
     <!-- Shared Footer -->
     <footer class="footer bg-white text-center text-muted py-3 border-top mt-auto">
         <div class="container">
-            <small>&copy; 2026 Exercise / BaitapWeb - HomeWorkWeb. Built with Bootstrap 5 &amp; SiteMesh 3.</small>
+            <small>&copy; 2026 Exercise / BaitapWeb - ProjectWeb. Built with Bootstrap 5 &amp; SiteMesh 3.</small>
         </div>
     </footer>
 

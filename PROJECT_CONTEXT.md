@@ -1,6 +1,6 @@
 ﻿# PROJECT CONTEXT
 
-REAL PROJECT PATH: E:\Web\New folder\BaitapWeb\HomeWorkWeb_Chau_Minh_Phat
+REAL PROJECT PATH: E:\Web\New folder\BaitapWeb\ProjectWeb_ChauMinhPhat_24110294
 PROJECT TYPE: Java Web Application (Jakarta EE 10 / Servlet 6.0 / JSP 3.1 / JSTL 3.0 / Hibernate 6 JPA)
 JAVA VERSION: 26 (Oracle JDK 26.0.2.1, maven.compiler.release = 26)
 BUILD TOOL: Apache Maven 3.9.11
@@ -29,8 +29,8 @@ MAIN CRUD FLOW:
 - URL: /sample?action=delete&id=X -> SampleServlet -> SampleServiceImpl -> redirect /sample?action=list
 
 IMPORTANT RULES FOR AI:
-- REAL PROJECT DIRECTORY: E:\Web\New folder\BaitapWeb\HomeWorkWeb_Chau_Minh_Phat
-- All commands, builds, and edits must be executed in E:\Web\New folder\BaitapWeb\HomeWorkWeb_Chau_Minh_Phat.
+- REAL PROJECT DIRECTORY: E:\Web\New folder\BaitapWeb\ProjectWeb_ChauMinhPhat_24110294
+- All commands, builds, and edits must be executed in E:\Web\New folder\BaitapWeb\ProjectWeb_ChauMinhPhat_24110294.
 - Do not create a new project.
 - Do not change framework.
 - Do not change port (keep Tomcat 8080).
