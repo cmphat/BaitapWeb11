@@ -15,7 +15,7 @@ import vn.iotstar.service.impl.UserServiceImpl;
 import vn.iotstar.util.EmailUtil;
 import vn.iotstar.util.OtpUtil;
 
-@WebServlet(urlPatterns = {"/register"})
+@WebServlet(urlPatterns = {"/legacy-register"})
 public class RegisterServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private final UserService userService = new UserServiceImpl();

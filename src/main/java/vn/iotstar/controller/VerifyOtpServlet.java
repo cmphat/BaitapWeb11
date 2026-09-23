@@ -14,7 +14,7 @@ import vn.iotstar.model.User;
 import vn.iotstar.service.UserService;
 import vn.iotstar.service.impl.UserServiceImpl;
 
-@WebServlet(urlPatterns = {"/verify-otp"})
+@WebServlet(urlPatterns = {"/legacy-verify-otp"})
 public class VerifyOtpServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private final UserService userService = new UserServiceImpl();

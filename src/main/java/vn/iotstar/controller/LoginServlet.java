@@ -12,7 +12,7 @@ import vn.iotstar.model.User;
 import vn.iotstar.service.UserService;
 import vn.iotstar.service.impl.UserServiceImpl;
 
-@WebServlet("/login")
+@WebServlet("/legacy-login")
 public class LoginServlet extends HttpServlet {
     private final UserService service = new UserServiceImpl();
 

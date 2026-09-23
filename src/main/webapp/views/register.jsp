@@ -44,7 +44,7 @@
                         <div class="mb-3">
                             <label for="fullname" class="form-label">Họ và tên <span class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="fullname" name="fullname" 
-                                   value="${not empty fullname ? fullname : param.fullname}" placeholder="Nguyễn Văn A" required>
+                                   value="${not empty fullname ? fullname : param.fullname}" placeholder="Châu Minh Phát" required>
                             <div class="invalid-feedback">Vui lòng nhập họ và tên.</div>
                         </div>
                         <div class="mb-3">

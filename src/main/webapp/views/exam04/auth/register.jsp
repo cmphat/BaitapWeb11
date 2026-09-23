@@ -1,0 +1,7 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%><%@ taglib prefix="c" uri="jakarta.tags.core"%>
+<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Đăng ký - Đề 04</title></head><body><div class="row justify-content-center"><div class="col-md-7"><div class="card shadow-sm"><div class="card-body p-4"><h3 class="text-center">Đăng ký tài khoản</h3>
+<c:if test="${not empty alert}"><div class="alert alert-danger"><c:out value="${alert}"/></div></c:if><form method="post" action="${pageContext.request.contextPath}/register"><div class="row g-3">
+<div class="col-md-6"><label class="form-label">Username</label><input class="form-control" name="username" value="<c:out value='${username}'/>" required minlength="3"></div><div class="col-md-6"><label class="form-label">Password</label><input class="form-control" type="password" name="password" required minlength="6"></div>
+<div class="col-md-6"><label class="form-label">Họ tên</label><input class="form-control" name="fullname" value="<c:out value='${fullname}'/>" required></div><div class="col-md-6"><label class="form-label">Điện thoại</label><input class="form-control" name="phone" value="<c:out value='${phone}'/>"></div>
+<div class="col-12"><label class="form-label">Email nhận OTP</label><input class="form-control" type="email" name="email" value="<c:out value='${email}'/>" required></div><div class="col-12"><button class="btn btn-success w-100">Đăng ký và gửi OTP</button></div></div></form></div></div></div></div></body></html>
+
