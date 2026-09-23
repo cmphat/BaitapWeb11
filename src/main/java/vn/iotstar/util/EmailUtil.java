@@ -16,13 +16,14 @@ import jakarta.mail.internet.MimeMessage;
 public class EmailUtil {
 
     private static final Logger LOGGER = Logger.getLogger(EmailUtil.class.getName());
+    private static final String MAIL_USERNAME = "phatchau1512@gmail.com";
 
     public static final String[] USERNAME_KEYS = {
         "EMAIL_USERNAME", "MAIL_USERNAME", "SMTP_USERNAME", "mail.smtp.user", "mail.user"
     };
 
     public static final String[] PASSWORD_KEYS = {
-        "EMAIL_PASSWORD", "MAIL_PASSWORD", "SMTP_PASSWORD", "mail.smtp.password", "mail.password"
+        "MAIL_APP_PASSWORD", "EMAIL_PASSWORD", "MAIL_PASSWORD", "SMTP_PASSWORD", "mail.smtp.password", "mail.password"
     };
 
     public static final String[] HOST_KEYS = {
@@ -128,13 +129,20 @@ public class EmailUtil {
      * Kiểm tra xem cấu hình email đã sẵn sàng chưa.
      */
     public static boolean isConfigured() {
-        String username = getConfig(USERNAME_KEYS);
         String password = getConfig(PASSWORD_KEYS);
-        return username != null && !username.isBlank() && password != null && !password.isBlank();
+        return password != null && !password.isBlank();
     }
 
     public static boolean sendOtp(String recipient, String otp, String purpose) {
-        String username = getConfig(USERNAME_KEYS);
+        return sendOtp(recipient, null, otp, purpose);
+    }
+
+    public static boolean sendActivationOtp(String recipient, String fullname, String otp) {
+        return sendOtp(recipient, fullname, otp, "ACTIVATE");
+    }
+
+    private static boolean sendOtp(String recipient, String fullname, String otp, String purpose) {
+        String username = MAIL_USERNAME;
         String password = getConfig(PASSWORD_KEYS);
 
         // Chuẩn hóa mật khẩu ứng dụng Google (loại bỏ toàn bộ khoảng trắng nếu người dùng copy nhóm 4 ký tự)
@@ -180,7 +188,7 @@ public class EmailUtil {
             LOGGER.severe("================================================================================");
             LOGGER.severe("[EMAIL OTP LỖI] THIẾU THÔNG TIN XÁC THỰC GỬI EMAIL SMTP!");
             LOGGER.severe("-> Danh sách biến username được hỗ trợ: EMAIL_USERNAME, MAIL_USERNAME, SMTP_USERNAME, mail.smtp.user");
-            LOGGER.severe("-> Danh sách biến password được hỗ trợ: EMAIL_PASSWORD, MAIL_PASSWORD, SMTP_PASSWORD, mail.smtp.password");
+            LOGGER.severe("-> Danh sách biến password được hỗ trợ: MAIL_APP_PASSWORD, EMAIL_PASSWORD, MAIL_PASSWORD, SMTP_PASSWORD, mail.smtp.password");
             if (username == null || username.isBlank()) {
                 LOGGER.severe("-> Trạng thái Username: CHƯA CẤU HÌNH (null/empty)");
             } else {
@@ -246,11 +254,11 @@ public class EmailUtil {
             String content;
 
             if ("ACTIVATE".equalsIgnoreCase(purpose)) {
-                subject = "Xác nhận kích hoạt tài khoản";
-                content = "Xin chào,\n\n"
-                        + "Mã OTP kích hoạt tài khoản của bạn là: " + otp + "\n\n"
-                        + "Mã có hiệu lực trong 5 phút.\n\n"
-                        + "Trân trọng,\nĐội ngũ Exercise Web.";
+                subject = "Đề 04 - Mã OTP kích hoạt tài khoản";
+                content = "Xin chào " + (fullname == null || fullname.isBlank() ? "bạn" : fullname) + ",\n\n"
+                        + "Mã OTP kích hoạt tài khoản của bạn là:\n\n" + otp + "\n\n"
+                        + "Mã OTP có hiệu lực trong 5 phút.\n\n"
+                        + "Châu Minh Phát\nMSSV: 24110294";
             } else if ("RESET_PASSWORD".equalsIgnoreCase(purpose)) {
                 subject = "OTP khôi phục mật khẩu";
                 content = "Xin chào,\n\n"
@@ -317,7 +325,7 @@ public class EmailUtil {
      */
     public static void main(String[] args) {
         System.out.println("=== KIỂM TRA CẤU HÌNH GỬI EMAIL OTP (SMTP) ===");
-        String user = getConfig(USERNAME_KEYS);
+        String user = MAIL_USERNAME;
         String pass = getConfig(PASSWORD_KEYS);
         String host = getConfig(HOST_KEYS);
         if (host == null || host.isBlank()) host = "smtp.gmail.com";
@@ -352,4 +360,3 @@ public class EmailUtil {
         System.out.println("==============================================");
     }
 }
-

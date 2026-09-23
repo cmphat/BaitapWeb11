@@ -16,6 +16,7 @@ Mọi ảnh chụp cần hiển thị rõ tên file, package và toàn bộ ph�
 - `src/main/java/vn/iotstar/controller/LoginController_24110294.java`
 - `src/main/java/vn/iotstar/controller/RegisterController_24110294.java`
 - `src/main/java/vn/iotstar/controller/VerifyOtpController_24110294.java`
+- `src/main/java/vn/iotstar/controller/ResendOtpController_24110294.java`
 - `src/main/java/vn/iotstar/controller/LogoutController_24110294.java`
 - `src/main/webapp/views/exam04/auth/login.jsp`, `register.jsp`, `verify-otp.jsp`
 
@@ -44,3 +45,9 @@ Mọi ảnh chụp cần hiển thị rõ tên file, package và toàn bộ ph�
 
 ## Database
 - `database/exam_04_24110294.sql`
+
+## Giao diện và asset
+- `src/main/webapp/assets/css/exam04.css`
+- `src/main/webapp/assets/images/posters/`
+- `src/main/webapp/assets/images/categories/`
+- `src/main/webapp/assets/images/avatars/`

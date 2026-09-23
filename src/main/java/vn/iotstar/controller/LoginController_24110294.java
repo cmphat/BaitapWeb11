@@ -24,9 +24,15 @@ public class LoginController_24110294 extends HttpServlet {
     @Override protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String username = value(req.getParameter("username"));
         String password = value(req.getParameter("password"));
+        User_24110294 found = service.findByUsername(username);
+        if (found != null && password.equals(found.getPassword()) && !found.isActive()) {
+            req.setAttribute("alert", "Tài khoản chưa được kích hoạt.");
+            req.setAttribute("username", username);
+            req.getRequestDispatcher("/views/exam04/auth/login.jsp").forward(req, resp); return;
+        }
         User_24110294 user = service.login(username, password);
         if (user == null) {
-            req.setAttribute("alert", "Tên đăng nhập, mật khẩu không đúng hoặc tài khoản chưa kích hoạt.");
+            req.setAttribute("alert", "Tên đăng nhập hoặc mật khẩu không đúng.");
             req.setAttribute("username", username);
             req.getRequestDispatcher("/views/exam04/auth/login.jsp").forward(req, resp); return;
         }
@@ -35,4 +41,3 @@ public class LoginController_24110294 extends HttpServlet {
     }
     private String value(String s) { return s == null ? "" : s.trim(); }
 }
-

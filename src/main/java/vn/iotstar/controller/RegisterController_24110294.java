@@ -35,12 +35,14 @@ public class RegisterController_24110294 extends HttpServlet {
         u.setAdmin(false); u.setActive(false); service.insert(u);
         String otp = OtpUtil.generateOtp();
         HttpSession session = req.getSession(true);
-        session.setAttribute("otpUsername", username); session.setAttribute("otpCode", otp);
-        session.setAttribute("otpExpiry", LocalDateTime.now().plusMinutes(5));
-        boolean sent = EmailUtil.sendOtp(email, otp, "ACTIVATE");
+        session.setAttribute("pendingUsername", username);
+        session.setAttribute("pendingEmail", email);
+        session.setAttribute("pendingFullname", fullname);
+        session.setAttribute("otp", otp);
+        session.setAttribute("otpCreatedAt", LocalDateTime.now());
+        boolean sent = EmailUtil.sendActivationOtp(email, fullname, otp);
         session.setAttribute("otpMailSent", sent);
         resp.sendRedirect(req.getContextPath() + "/verify-otp");
     }
     private String val(HttpServletRequest req, String n) { String s=req.getParameter(n); return s==null?"":s.trim(); }
 }
-

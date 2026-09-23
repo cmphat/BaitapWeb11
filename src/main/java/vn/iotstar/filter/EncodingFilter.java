@@ -7,9 +7,7 @@ import jakarta.servlet.FilterConfig;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
-import jakarta.servlet.annotation.WebFilter;
-
-@WebFilter(urlPatterns = "/*", filterName = "EncodingFilter")
+import jakarta.servlet.http.HttpServletRequest;
 public class EncodingFilter implements Filter {
 
     @Override
@@ -21,6 +19,11 @@ public class EncodingFilter implements Filter {
             throws IOException, ServletException {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
+        String uri = ((HttpServletRequest) request).getRequestURI();
+        if (!uri.contains("/assets/") && !uri.contains("/css/") && !uri.contains("/js/")
+                && !uri.contains("/images/") && !uri.contains("/uploads/")) {
+            response.setContentType("text/html; charset=UTF-8");
+        }
         chain.doFilter(request, response);
     }
 

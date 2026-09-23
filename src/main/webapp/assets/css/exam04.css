@@ -1,0 +1,43 @@
+:root {
+    --exam-primary: #0d6efd;
+    --exam-text: #212529;
+    --exam-muted: #6c757d;
+    --exam-bg: #f8f9fa;
+    --exam-border: #dee2e6;
+}
+
+html, body { min-height: 100%; }
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--exam-text);
+    background: var(--exam-bg);
+    display: flex;
+    flex-direction: column;
+}
+.main-content { flex: 1 0 auto; }
+.navbar-brand { letter-spacing: .3px; }
+.navbar .nav-link { font-weight: 500; }
+.page-title { font-weight: 700; margin-bottom: .35rem; }
+.page-subtitle { color: var(--exam-muted); margin-bottom: 1.5rem; }
+.card { border-color: var(--exam-border); border-radius: .5rem; }
+.exam-card { box-shadow: 0 .15rem .45rem rgba(33,37,41,.08); }
+.video-card { overflow: hidden; transition: none; }
+.video-card .video-poster { width: 100%; height: 230px; object-fit: cover; background: #e9ecef; }
+.video-card .card-title { font-size: 1.05rem; font-weight: 650; min-height: 2.6rem; }
+.video-meta { color: var(--exam-muted); font-size: .88rem; }
+.video-stats { display: flex; gap: 1rem; color: #495057; font-size: .9rem; }
+.category-nav { display: flex; flex-wrap: wrap; gap: .65rem; }
+.category-link { border: 1px solid var(--exam-border); background: #fff; color: var(--exam-text); padding: .45rem .75rem; border-radius: .4rem; text-decoration: none; display: inline-flex; align-items: center; gap: .5rem; }
+.category-link:hover, .category-link.active { border-color: var(--exam-primary); color: var(--exam-primary); background: #f5f9ff; }
+.category-thumb { width: 34px; height: 34px; object-fit: cover; border-radius: .25rem; }
+.student-footer { flex-shrink: 0; background: #fff; border-top: 1px solid var(--exam-border); color: var(--exam-muted); }
+.student-footer strong { color: var(--exam-text); }
+.detail-poster { width: 100%; min-height: 340px; max-height: 430px; object-fit: cover; background: #e9ecef; }
+.table > :not(caption) > * > * { vertical-align: middle; }
+.avatar-sm { width: 38px; height: 38px; object-fit: cover; border-radius: 50%; border: 1px solid var(--exam-border); }
+@media (max-width: 767.98px) {
+    .video-card .video-poster { height: 210px; }
+    .detail-poster { min-height: 240px; }
+}

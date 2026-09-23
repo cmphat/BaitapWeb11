@@ -13,7 +13,7 @@ public class VerifyOtpController_24110294 extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private final IUserService_24110294 service = new UserService_24110294();
     @Override protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if (req.getSession(false) == null || req.getSession(false).getAttribute("otpUsername") == null) {
+        if (req.getSession(false) == null || req.getSession(false).getAttribute("pendingUsername") == null) {
             resp.sendRedirect(req.getContextPath()+"/register"); return;
         }
         req.getRequestDispatcher("/views/exam04/auth/verify-otp.jsp").forward(req,resp);
@@ -21,15 +21,15 @@ public class VerifyOtpController_24110294 extends HttpServlet {
     @Override protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession s=req.getSession(false);
         String input=req.getParameter("otp");
-        if (s==null || s.getAttribute("otpUsername")==null) { resp.sendRedirect(req.getContextPath()+"/register"); return; }
-        String expected=(String)s.getAttribute("otpCode"); LocalDateTime expiry=(LocalDateTime)s.getAttribute("otpExpiry");
-        if (input==null || !input.trim().equals(expected) || expiry==null || LocalDateTime.now().isAfter(expiry)) {
+        if (s==null || s.getAttribute("pendingUsername")==null) { resp.sendRedirect(req.getContextPath()+"/register"); return; }
+        String expected=(String)s.getAttribute("otp"); LocalDateTime createdAt=(LocalDateTime)s.getAttribute("otpCreatedAt");
+        if (input==null || !input.trim().equals(expected) || createdAt==null || LocalDateTime.now().isAfter(createdAt.plusMinutes(5))) {
             req.setAttribute("alert", "Mã OTP không đúng hoặc đã hết hạn.");
             req.getRequestDispatcher("/views/exam04/auth/verify-otp.jsp").forward(req,resp); return;
         }
-        service.activate((String)s.getAttribute("otpUsername"));
-        s.removeAttribute("otpUsername"); s.removeAttribute("otpCode"); s.removeAttribute("otpExpiry"); s.removeAttribute("otpMailSent");
+        service.activate((String)s.getAttribute("pendingUsername"));
+        s.removeAttribute("pendingUsername"); s.removeAttribute("pendingEmail"); s.removeAttribute("pendingFullname");
+        s.removeAttribute("otp"); s.removeAttribute("otpCreatedAt"); s.removeAttribute("otpMailSent");
         resp.sendRedirect(req.getContextPath()+"/login?activated=1");
     }
 }
-
