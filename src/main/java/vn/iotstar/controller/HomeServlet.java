@@ -8,7 +8,7 @@ import vn.iotstar.service.IProductService;
 import vn.iotstar.service.impl.ProductServiceImpl;
 import java.util.List;
 
-@WebServlet(urlPatterns = {"/", "/home"})
+@WebServlet(urlPatterns = {"/legacy-home"})
 public class HomeServlet extends HttpServlet {
     private final IProductService productService = new ProductServiceImpl();
 

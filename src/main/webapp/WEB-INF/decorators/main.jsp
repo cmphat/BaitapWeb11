@@ -122,7 +122,9 @@
     <!-- Shared Footer -->
     <footer class="footer bg-white text-center text-muted py-3 border-top mt-auto">
         <div class="container">
-            <small>&copy; 2026 Exercise / BaitapWeb - ProjectWeb. Built with Bootstrap 5 &amp; SiteMesh 3.</small>
+            <div><strong>Họ tên:</strong> Châu Minh Phát</div>
+            <div><strong>MSSV:</strong> 24110294</div>
+            <div><strong>Mã đề:</strong> 04</div>
         </div>
     </footer>
 

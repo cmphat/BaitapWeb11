@@ -10,6 +10,6 @@
     <mapping path="/assets/*" exclude="true"/>
     <mapping path="/uploads/*" exclude="true"/>
 
-    <!-- Map all web pages to the main decorator: resolves to /WEB-INF/decorators/main.jsp -->
-    <mapping path="/*" decorator="main.jsp"/>
+    <mapping path="/admin/*" decorator="admin.jsp"/>
+    <mapping path="/*" decorator="user.jsp"/>
 </sitemesh>
