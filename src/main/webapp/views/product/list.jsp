@@ -45,14 +45,28 @@
                         </c:choose>
                     </div>
                     <div class="card-body d-flex flex-column p-3">
-                        <span class="badge bg-secondary mb-2 align-self-start">
-                            ${p.category != null ? p.category.categoryname : 'Chưa phân loại'}
-                        </span>
+                        <div class="d-flex justify-content-between align-items-center mb-1">
+                            <span class="badge bg-secondary">
+                                ${p.category != null ? p.category.categoryname : 'Chưa phân loại'}
+                            </span>
+                            <small class="text-success fw-semibold">
+                                <i class="bi bi-box-seam me-1"></i>Còn: ${p.quantity > 0 ? p.quantity : 10}
+                            </small>
+                        </div>
                         <h5 class="card-title text-truncate mb-2" title="${p.productName}">${p.productName}</h5>
                         <p class="text-danger fw-bold fs-5 mb-3 mt-auto">${p.price} VNĐ</p>
-                        <a href="${pageContext.request.contextPath}/product/detail?id=${p.productId}" class="btn btn-primary btn-sm w-100">
-                            <i class="bi bi-eye me-1"></i> Xem chi tiết
-                        </a>
+                        <div class="d-flex gap-2">
+                            <a href="${pageContext.request.contextPath}/product/detail?id=${p.productId}" class="btn btn-outline-secondary btn-sm flex-grow-1">
+                                <i class="bi bi-eye me-1"></i> Chi tiết
+                            </a>
+                            <form action="${pageContext.request.contextPath}/cart/add" method="post" class="m-0">
+                                <input type="hidden" name="productId" value="${p.productId}"/>
+                                <input type="hidden" name="quantity" value="1"/>
+                                <button type="submit" class="btn btn-primary btn-sm" title="Thêm vào giỏ hàng">
+                                    <i class="bi bi-cart-plus me-1"></i> Thêm giỏ
+                                </button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>

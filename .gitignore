@@ -6,3 +6,5 @@ target/
 *.iml
 mail.properties
 src/main/resources/mail.properties
+tmp/
+tools/

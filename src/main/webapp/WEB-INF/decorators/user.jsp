@@ -21,16 +21,49 @@
         <div class="collapse navbar-collapse" id="userNavbar">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/home">Trang chủ</a></li>
-                <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/videos">Sản phẩm</a></li>
+                <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/products"><i class="bi bi-grid me-1"></i>Sản phẩm</a></li>
+                <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/videos"><i class="bi bi-play-circle me-1"></i>Video</a></li>
+                <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/orders"><i class="bi bi-clock-history me-1"></i>Lịch sử đơn</a></li>
+                <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/exam">Đề thi</a></li>
                 <c:if test="${not empty sessionScope.account and sessionScope.account.admin}">
                     <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/admin/home">Trang quản trị</a></li>
                 </c:if>
             </ul>
             <ul class="navbar-nav ms-auto align-items-lg-center">
+                <li class="nav-item me-2">
+                    <a class="nav-link position-relative text-white px-3 py-1 rounded bg-primary-subtle bg-opacity-25" href="${pageContext.request.contextPath}/cart" title="Xem giỏ hàng">
+                        <i class="bi bi-cart3 fs-5 align-middle"></i>
+                        <span class="ms-1 align-middle d-none d-sm-inline">Giỏ hàng</span>
+                        <c:choose>
+                            <c:when test="${not empty sessionScope.cart and sessionScope.cart.totalQuantity > 0}">
+                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger border border-light">
+                                    ${sessionScope.cart.totalQuantity}
+                                </span>
+                            </c:when>
+                            <c:otherwise>
+                                <span class="badge bg-secondary ms-1">0</span>
+                            </c:otherwise>
+                        </c:choose>
+                    </a>
+                </li>
                 <c:choose>
                     <c:when test="${not empty sessionScope.account}">
-                        <li class="nav-item"><span class="nav-link text-white">Xin chào, <strong><c:out value="${sessionScope.account.fullname}"/></strong></span></li>
-                        <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/logout">Đăng xuất</a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-white fw-semibold" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-person-circle me-1"></i><c:out value="${sessionScope.account.fullname}"/>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end shadow-sm">
+                                <li><a class="dropdown-item" href="${pageContext.request.contextPath}/orders"><i class="bi bi-receipt me-2 text-primary"></i>Đơn hàng của tôi</a></li>
+                                <li><a class="dropdown-item" href="${pageContext.request.contextPath}/cart"><i class="bi bi-cart3 me-2 text-success"></i>Giỏ hàng (${not empty sessionScope.cart ? sessionScope.cart.totalQuantity : 0})</a></li>
+                                <c:if test="${sessionScope.account.admin}">
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item" href="${pageContext.request.contextPath}/admin/orders"><i class="bi bi-shield-check me-2 text-danger"></i>Quản lý Đơn hàng (Admin)</a></li>
+                                    <li><a class="dropdown-item" href="${pageContext.request.contextPath}/admin/home"><i class="bi bi-speedometer2 me-2 text-primary"></i>Trang quản trị</a></li>
+                                </c:if>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item text-danger" href="${pageContext.request.contextPath}/logout"><i class="bi bi-box-arrow-right me-2"></i>Đăng xuất</a></li>
+                            </ul>
+                        </li>
                     </c:when>
                     <c:otherwise>
                         <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/login">Đăng nhập</a></li>
@@ -51,7 +84,7 @@
         <span><strong>Mã đề:</strong> 04</span>
     </div>
 </footer>
+<div id="appToast" class="app-toast" role="status" aria-live="polite"></div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-

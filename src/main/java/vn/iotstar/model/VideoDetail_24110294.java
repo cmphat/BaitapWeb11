@@ -29,5 +29,6 @@ public class VideoDetail_24110294 {
     public void setShareCount(int shareCount) { this.shareCount = shareCount; }
     public int getLikeCount() { return likeCount; }
     public void setLikeCount(int likeCount) { this.likeCount = likeCount; }
+    public String getVideoPath() { return vn.iotstar.util.VideoPathUtil.resolveVideoPath(this.videoId); }
 }
 

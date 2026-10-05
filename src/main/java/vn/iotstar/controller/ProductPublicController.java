@@ -13,7 +13,7 @@ import vn.iotstar.entity.Product;
 import vn.iotstar.service.IProductService;
 import vn.iotstar.service.impl.ProductServiceImpl;
 
-@WebServlet(urlPatterns = {"/product", "/product/detail"})
+@WebServlet(urlPatterns = {"/product", "/products", "/product/detail"})
 public class ProductPublicController extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private final IProductService productService = new ProductServiceImpl();
@@ -22,7 +22,7 @@ public class ProductPublicController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String url = req.getRequestURI();
 
-        if (url.endsWith("/product")) {
+        if (url.endsWith("/product") || url.endsWith("/products")) {
             int page = 1;
             int pageSize = 6;
 

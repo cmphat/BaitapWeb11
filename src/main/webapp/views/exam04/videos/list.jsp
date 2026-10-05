@@ -41,18 +41,18 @@
         <div class="row g-4">
             <c:forEach items="${videos}" var="video">
                 <div class="col-12 col-md-6 col-lg-4">
-                    <article class="card exam-card video-card h-100">
-                        <img class="video-poster" src="${pageContext.request.contextPath}/${video.poster}" alt="Poster ${video.title}">
-                        <div class="card-body d-flex flex-column">
+                    <article class="card exam-card video-card h-100 animate-in">
+                        <img class="video-poster" src="${pageContext.request.contextPath}${video.poster}?v=frame-20260923" alt="Poster ${video.title}">
+                        <div class="card-body d-flex flex-column p-3">
                             <span class="badge text-bg-light border align-self-start mb-2"><c:out value="${video.categoryName}"/></span>
                             <h3 class="card-title"><c:out value="${video.title}"/></h3>
                             <p class="video-meta mb-2">Mã video: <strong><c:out value="${video.videoId}"/></strong></p>
                             <div class="video-stats mb-3">
-                                <span><i class="bi bi-eye"></i> ${video.views}</span>
-                                <span><i class="bi bi-share"></i> ${video.shareCount}</span>
-                                <span><i class="bi bi-heart"></i> ${video.likeCount}</span>
+                                <span><i class="bi bi-eye text-secondary"></i> ${video.views}</span>
+                                <span><i class="bi bi-share text-secondary"></i> ${video.shareCount}</span>
+                                <span><i class="bi bi-heart text-secondary"></i> ${video.likeCount}</span>
                             </div>
-                            <a class="btn btn-outline-primary mt-auto align-self-start" href="${pageContext.request.contextPath}/video/detail?id=${video.videoId}">Xem chi tiết</a>
+                            <a class="btn btn-outline-primary btn-sm mt-auto align-self-start" href="${pageContext.request.contextPath}/video/detail?id=${video.videoId}">Xem chi tiết</a>
                         </div>
                     </article>
                 </div>
@@ -61,7 +61,7 @@
     </c:otherwise>
 </c:choose>
 
-<c:if test="${not empty selectedCategory}">
+<c:if test="${not empty selectedCategory and totalPages > 1}">
     <nav class="mt-4" aria-label="Phân trang video">
         <ul class="pagination justify-content-center">
             <li class="page-item ${page == 1 ? 'disabled' : ''}">
@@ -80,4 +80,3 @@
 </c:if>
 </body>
 </html>
-

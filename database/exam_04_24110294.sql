@@ -55,19 +55,19 @@ BEGIN
   VALUES (@username,N'123456',N'09010000'+RIGHT(N'0'+CAST(@u+1 AS NVARCHAR(2)),2),N'Người dùng '+CAST(@u AS NVARCHAR(2)),@username+N'@example.com',0,1,NULL);
  SET @u=@u+1;
 END;
-UPDATE dbo.Users SET Fullname=N'Quản trị viên',Admin=1,Active=1 WHERE Username=N'admin';
-UPDATE dbo.Users SET Fullname=N'Nguyễn Văn An',Images=N'assets/images/avatars/user01.jpg' WHERE Username=N'user01';
-UPDATE dbo.Users SET Fullname=N'Trần Thị Bình',Images=N'assets/images/avatars/user02.jpg' WHERE Username=N'user02';
-UPDATE dbo.Users SET Fullname=N'Lê Minh Cường',Images=N'assets/images/avatars/user03.jpg' WHERE Username=N'user03';
-UPDATE dbo.Users SET Fullname=N'Phạm Thị Dung',Images=N'assets/images/avatars/user04.jpg' WHERE Username=N'user04';
-UPDATE dbo.Users SET Fullname=N'Hoàng Gia Huy',Images=N'assets/images/avatars/user05.jpg' WHERE Username=N'user05';
-UPDATE dbo.Users SET Fullname=N'Võ Ngọc Lan',Images=N'assets/images/avatars/user06.jpg' WHERE Username=N'user06';
-UPDATE dbo.Users SET Fullname=N'Đặng Quốc Minh',Images=N'assets/images/avatars/user07.jpg' WHERE Username=N'user07';
-UPDATE dbo.Users SET Fullname=N'Bùi Thu Nga',Images=N'assets/images/avatars/user08.jpg' WHERE Username=N'user08';
-UPDATE dbo.Users SET Fullname=N'Đỗ Hải Nam' WHERE Username=N'user09';
-UPDATE dbo.Users SET Fullname=N'Ngô Kim Oanh' WHERE Username=N'user10';
-UPDATE dbo.Users SET Fullname=N'Dương Đức Phúc' WHERE Username=N'user11';
-UPDATE dbo.Users SET Fullname=N'Vũ Thanh Tâm' WHERE Username=N'user12';
+UPDATE dbo.Users SET Fullname=N'Quản trị viên',Admin=1,Active=1,Images=N'assets/images/avatars/avatar_01.png' WHERE Username=N'admin';
+UPDATE dbo.Users SET Fullname=N'Nguyễn Văn An',Images=N'assets/images/avatars/avatar_02.png' WHERE Username=N'user01';
+UPDATE dbo.Users SET Fullname=N'Trần Thị Bình',Images=N'assets/images/avatars/avatar_03.png' WHERE Username=N'user02';
+UPDATE dbo.Users SET Fullname=N'Lê Minh Cường',Images=N'assets/images/avatars/avatar_04.png' WHERE Username=N'user03';
+UPDATE dbo.Users SET Fullname=N'Phạm Thị Dung',Images=N'assets/images/avatars/avatar_05.png' WHERE Username=N'user04';
+UPDATE dbo.Users SET Fullname=N'Hoàng Gia Huy',Images=N'assets/images/avatars/avatar_06.png' WHERE Username=N'user05';
+UPDATE dbo.Users SET Fullname=N'Võ Ngọc Lan',Images=N'assets/images/avatars/avatar_07.png' WHERE Username=N'user06';
+UPDATE dbo.Users SET Fullname=N'Đặng Quốc Minh',Images=N'assets/images/avatars/avatar_08.png' WHERE Username=N'user07';
+UPDATE dbo.Users SET Fullname=N'Bùi Thu Nga',Images=N'assets/images/avatars/avatar_09.png' WHERE Username=N'user08';
+UPDATE dbo.Users SET Fullname=N'Đỗ Hải Nam',Images=N'assets/images/avatars/avatar_10.png' WHERE Username=N'user09';
+UPDATE dbo.Users SET Fullname=N'Ngô Kim Oanh',Images=N'assets/images/avatars/avatar_11.png' WHERE Username=N'user10';
+UPDATE dbo.Users SET Fullname=N'Dương Đức Phúc',Images=N'assets/images/avatars/avatar_12.png' WHERE Username=N'user11';
+UPDATE dbo.Users SET Fullname=N'Vũ Thanh Tâm',Images=N'assets/images/avatars/avatar_13.png' WHERE Username=N'user12';
 GO
 
 IF NOT EXISTS (SELECT 1 FROM dbo.Category WHERE Categorycode=N'WEB')
@@ -103,10 +103,10 @@ INSERT @VideoSeed VALUES
 (N'VID015',N'CRUD với Servlet',169,N'Xây dựng đầy đủ chức năng thêm, xem, sửa và xóa.',N'JAVA'),
 (N'VID016',N'Ứng dụng MVC hoàn chỉnh',231,N'Hoàn thiện ứng dụng Java Web theo mô hình MVC ba lớp.',N'JAVA');
 MERGE dbo.Videos AS target
-USING (SELECT s.VideoId,s.Title,N'assets/images/posters/poster_'+LOWER(s.VideoId)+N'.jpg' Poster,
+USING (SELECT s.VideoId,s.Title,N'/assets/images/posters/poster_'+LOWER(s.VideoId)+N'.jpg' Poster,
  s.Views,s.Description,c.CategoryId FROM @VideoSeed s JOIN dbo.Category c ON c.Categorycode=s.Categorycode) source
 ON target.VideoId=source.VideoId
-WHEN MATCHED THEN UPDATE SET Title=source.Title,Poster=source.Poster,Views=source.Views,Description=source.Description,Active=1,CategoryId=source.CategoryId
+WHEN MATCHED THEN UPDATE SET Title=source.Title,Poster=source.Poster,Description=source.Description,Active=1,CategoryId=source.CategoryId
 WHEN NOT MATCHED THEN INSERT (VideoId,Title,Poster,Views,Description,Active,CategoryId)
  VALUES (source.VideoId,source.Title,source.Poster,source.Views,source.Description,1,source.CategoryId);
 GO
@@ -118,4 +118,22 @@ IF NOT EXISTS (SELECT 1 FROM dbo.Favorites WHERE VideoId=N'VID005' AND Username=
 IF NOT EXISTS (SELECT 1 FROM dbo.Shares WHERE VideoId=N'VID001' AND Username=N'user01') INSERT dbo.Shares VALUES (N'friend1@example.com',CAST(GETDATE() AS DATE),N'user01',N'VID001');
 IF NOT EXISTS (SELECT 1 FROM dbo.Shares WHERE VideoId=N'VID001' AND Username=N'user02') INSERT dbo.Shares VALUES (N'friend2@example.com',CAST(GETDATE() AS DATE),N'user02',N'VID001');
 IF NOT EXISTS (SELECT 1 FROM dbo.Shares WHERE VideoId=N'VID003' AND Username=N'user03') INSERT dbo.Shares VALUES (N'friend3@example.com',CAST(GETDATE() AS DATE),N'user03',N'VID003');
+GO
+
+-- Bảng phụ phục vụ thống kê hành vi; không thay đổi cấu trúc các bảng cốt lõi của đề.
+IF OBJECT_ID(N'dbo.VideoInteractions_24110294', N'U') IS NULL
+BEGIN
+    CREATE TABLE dbo.VideoInteractions_24110294 (
+        InteractionId BIGINT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+        Username NVARCHAR(50) NULL,
+        VideoId NVARCHAR(50) NOT NULL,
+        ActionType NVARCHAR(20) NOT NULL,
+        SessionId NVARCHAR(100) NULL,
+        ActionAt DATETIME2 NOT NULL CONSTRAINT DF_VideoInteractions_24110294_ActionAt DEFAULT SYSDATETIME(),
+        CONSTRAINT FK_VideoInteractions_24110294_Users FOREIGN KEY (Username) REFERENCES dbo.Users(Username),
+        CONSTRAINT FK_VideoInteractions_24110294_Videos FOREIGN KEY (VideoId) REFERENCES dbo.Videos(VideoId)
+    );
+    CREATE INDEX IX_VideoInteractions_24110294_Video_Action
+        ON dbo.VideoInteractions_24110294 (VideoId, ActionType, ActionAt DESC);
+END;
 GO

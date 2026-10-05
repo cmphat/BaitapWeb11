@@ -39,6 +39,9 @@ public class Product implements Serializable {
     @Column(name = "Status")
     private int status;
 
+    @Column(name = "Quantity")
+    private int quantity = 10;
+
     @Column(name = "CreatedAt")
     private LocalDateTime createdAt;
 
@@ -119,6 +122,14 @@ public class Product implements Serializable {
 
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     public Category getCategory() {
